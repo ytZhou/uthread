@@ -14,6 +14,7 @@ uthread
 
 更详细的介绍，请查看我的中文博客 [人既无名的专栏](http://blog.csdn.net/qq910894904/article/details/41911175). 
 
+===============================================================
 笔记：
 create的时候，如果有空闲的协程，则复用，没有则创建新的，同时保存fun/arg指针参数，设置状态为runenable。
 resume的时候，判断状态，如果是runenable则获取上下文放到协程的ctx当中，设置栈和栈大小，设置ulink，修改状态为running，通过makecontext设置ctx指向，并设置参数。注意runenable状态后无break，直接调用swapcontext切换到ctx上下文当中，同时保存当前上下文到mainctx当中。
